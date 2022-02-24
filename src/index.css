@@ -15,9 +15,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  --dark-grey: #24292e;
+  --light-grey: #f6f8fa;
+  --blue: #0366d6;
+  --green-progress: #22863a;
+  --red: #cb2431;
+  --green-add: #2ea44f;
+  --grey-cancel: #fafbfc;
+  --grey-border: rgba(27,31,35,0.15)
 }
