@@ -1,9 +1,10 @@
-import './App.css';
+import "./App.css";
+import AddCard from "./components/add-card/addcard";
 
 function App() {
   return (
     <div className="App">
-      <p>Working</p>
+      <AddCard></AddCard>
     </div>
   );
 }
