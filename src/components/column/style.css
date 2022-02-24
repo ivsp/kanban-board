@@ -1,0 +1,53 @@
+.column__container {
+    margin: .4rem;
+    padding: .2rem;
+    min-height: 70vh;
+    width: 30%;
+    background-color: var(--light-grey);
+    border-radius: .4rem;
+    border: 1px solid var(--grey-border);
+}
+
+.column__header {
+    margin: .1rem .4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.column__main-info-container {
+    display: flex;
+    gap: .4rem;
+}
+
+.column-text {
+    color: var(--dark-grey);
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+.column__cards-counter {
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--grey-border);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .6rem;
+}
+
+
+/* add button */
+
+.column__button-add-card {
+    border: none;
+    background-color: var(--light-grey);
+    font-size: 1.1rem;
+    color: var(--dark-grey);
+}
+
+.column__button-add-card:hover {
+    cursor: pointer;
+}
