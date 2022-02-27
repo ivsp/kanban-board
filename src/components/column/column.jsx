@@ -7,18 +7,30 @@ import { useContext } from "react";
 
 function Column({ type }) {
   const { cardsData, setCardsData } = useContext(CardContext);
+  const [wantAddCard, setWantAddCard] = useState(false);
 
   const addCard = (cardTitle) => {
-    const today = new Date();
+    const date = new Date().toDateString();
+    const time = new Date().toLocaleTimeString().substring(0, 5);
+    console.log(time);
     const card = {
       title: cardTitle,
       columnID: type,
-      date: 34534,
+      date: date,
+      time: time,
     };
     setCardsData([...cardsData, card]);
   };
+
+  const openAddCard = () => setWantAddCard(true);
+  const closeAddCard = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setWantAddCard(false);
+  };
   cardsData.forEach((card, i) => (card.id = i + 1));
   console.log(cardsData);
+
   const filteredCards = cardsData.filter((card) => card.columnID === type);
 
   return (
@@ -30,14 +42,23 @@ function Column({ type }) {
           </p>
           <p className="column__type column-text">{type}</p>
         </div>
-        <button className="column__button-add-card">+</button>
+        <button onClick={openAddCard} className="column__button-add-card">
+          +
+        </button>
       </div>
 
-      {filteredCards.map(({ title, id, date }) => {
-        return <Card date={date} id={id} title={title}></Card>;
+      {filteredCards.map(({ title, id, date, time }) => {
+        return <Card time={time} date={date} id={id} title={title}></Card>;
       })}
 
-      <AddCard handleAddCard={addCard}></AddCard>
+      {wantAddCard ? (
+        <AddCard
+          handleAddCard={addCard}
+          handleCloseAddCard={closeAddCard}
+        ></AddCard>
+      ) : (
+        <></>
+      )}
     </section>
   );
 }
