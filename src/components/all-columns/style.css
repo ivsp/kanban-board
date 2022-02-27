@@ -1,0 +1,6 @@
+.columns__container {
+    display: flex;
+    height: 75vh;
+    justify-content: center;
+    width: 1400px;
+}

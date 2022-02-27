@@ -1,0 +1,72 @@
+.card {
+    margin: .5rem;
+    padding: .3rem;
+    width: 360px;
+    background-color: white;
+    border: 1px solid var(--grey-border);
+    border-radius: .3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card__main-info {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    width: auto;
+}
+
+/* progress icon */
+.card__progress-icon {
+    border: 1px solid var(--green-progress);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__progress-icon--status {
+
+    width: .1rem;
+    height: .1rem;
+    border-radius: 50%;
+    background-color: var(--green-progress);
+}
+
+/* card title */
+
+.card__title-container {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+}
+
+.card__title {
+    color: var(--blue);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+/* creation date */
+
+.card__creation-date {
+    color: var(--dark-grey);
+    font-size: .8rem;
+    margin-left: 1.4rem;
+}
+
+/* trashcan icon */
+.card__delete-icon {
+    margin-right: .5rem;
+    border: none;
+    background-color: white;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+.card__delete-icon:hover {
+    cursor: pointer;
+}
