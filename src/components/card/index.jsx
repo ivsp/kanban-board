@@ -5,12 +5,14 @@ import { CardContext } from "../../context/cards-context";
 function Card({ title = "card title", id, date, time }) {
   const { cardsData, setCardsData } = useContext(CardContext);
 
-  const handleDeleteCard = () => {
-    const index = cardsData.findIndex((card) => {
-      return card.id === { id };
+  const handleDeleteCard = (e) => {
+    e.stopPropagation();
+    cardsData.forEach((card, i) => {
+      if (card.id === id) {
+        cardsData.splice(i, 1);
+        setCardsData([...cardsData]);
+      }
     });
-    cardsData.splice(index, 1);
-    setCardsData([...cardsData]);
   };
 
   return (

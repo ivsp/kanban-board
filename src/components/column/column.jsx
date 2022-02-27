@@ -7,12 +7,11 @@ import { useContext } from "react";
 
 function Column({ type }) {
   const { cardsData, setCardsData } = useContext(CardContext);
-  const [wantAddCard, setWantAddCard] = useState(false);
+  const [printAddCard, setPrintAddCard] = useState(false);
 
   const addCard = (cardTitle) => {
     const date = new Date().toDateString();
     const time = new Date().toLocaleTimeString().substring(0, 5);
-    console.log(time);
     const card = {
       title: cardTitle,
       columnID: type,
@@ -20,13 +19,14 @@ function Column({ type }) {
       time: time,
     };
     setCardsData([...cardsData, card]);
+    setPrintAddCard(false);
   };
 
-  const openAddCard = () => setWantAddCard(true);
+  const openAddCard = () => setPrintAddCard(!printAddCard);
   const closeAddCard = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setWantAddCard(false);
+    setPrintAddCard(false);
   };
   cardsData.forEach((card, i) => (card.id = i + 1));
   console.log(cardsData);
@@ -42,16 +42,17 @@ function Column({ type }) {
           </p>
           <p className="column__type column-text">{type}</p>
         </div>
-        <button onClick={openAddCard} className="column__button-add-card">
-          +
-        </button>
+        {printAddCard ? (
+          <button onClick={openAddCard} className="column__button-add-card">
+            -
+          </button>
+        ) : (
+          <button onClick={openAddCard} className="column__button-add-card">
+            +
+          </button>
+        )}
       </div>
-
-      {filteredCards.map(({ title, id, date, time }) => {
-        return <Card time={time} date={date} id={id} title={title}></Card>;
-      })}
-
-      {wantAddCard ? (
+      {printAddCard ? (
         <AddCard
           handleAddCard={addCard}
           handleCloseAddCard={closeAddCard}
@@ -59,6 +60,10 @@ function Column({ type }) {
       ) : (
         <></>
       )}
+
+      {filteredCards.map(({ title, id, date, time }) => {
+        return <Card time={time} date={date} id={id} title={title}></Card>;
+      })}
     </section>
   );
 }
