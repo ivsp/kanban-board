@@ -3,10 +3,11 @@ import { useContext } from "react";
 import { CardContext } from "../../context/cards-context";
 
 function Card({ title = "card title", id, date, time }) {
-  const { cardsData, setCardsData } = useContext(CardContext);
+  const [cardsData, setCardsData] = useContext(CardContext);
 
   const handleDeleteCard = (e) => {
     e.stopPropagation();
+    console.log();
     cardsData.forEach((card, i) => {
       if (card.id === id) {
         cardsData.splice(i, 1);

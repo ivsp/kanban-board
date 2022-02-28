@@ -1,6 +1,6 @@
 .columns__container {
     display: flex;
-    height: 75vh;
+    flex-wrap: wrap;
+    width: 100%;
     justify-content: center;
-    width: 1400px;
 }

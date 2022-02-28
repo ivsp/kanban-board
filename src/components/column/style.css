@@ -1,11 +1,14 @@
 .column__container {
-    margin: .4rem;
+    margin: .5rem;
     padding: .2rem;
+    max-height: 70vh;
     min-height: 70vh;
-    width: 30%;
+    max-width: 50%;
+    min-width: 25%;
     background-color: var(--light-grey);
     border-radius: .4rem;
     border: 1px solid var(--grey-border);
+    overflow-y: auto;
 }
 
 .column__header {
