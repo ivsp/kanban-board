@@ -18,22 +18,17 @@
 }
 
 /* progress icon */
-.card__progress-icon {
-    border: 1px solid var(--green-progress);
+
+.icono__rojo{
     width: 1rem;
     height: 1rem;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+.icono__verde{
+    width: 1rem;
+    height: 1rem;
+
 }
 
-.card__progress-icon--status {
-    width: .1rem;
-    height: .1rem;
-    border-radius: 50%;
-    background-color: var(--green-progress);
-}
 
 /* card title */
 

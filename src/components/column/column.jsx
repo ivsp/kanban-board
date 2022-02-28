@@ -61,8 +61,8 @@ function Column({ type }) {
         <></>
       )}
 
-      {filteredCards.map(({ title, id, date, time }) => {
-        return <Card time={time} date={date} id={id} title={title}></Card>;
+      {filteredCards.map(({ title, id, date, time,columnID }) => {
+        return <Card time={time} date={date} id={id} title={title} columnID={columnID}></Card>;
       })}
     </section>
   );
