@@ -51,6 +51,17 @@
     color: var(--dark-grey);
 }
 
-.column__button-add-card:hover {
+.column__button-add-card:hover, .column__button-clear-all {
     cursor: pointer;
 }
+
+.column__right-side-actions {
+    display: flex;
+    gap: .7rem;
+}
+.column__button-clear-all {
+    border: none;
+    color: var(--dark-grey);
+    background-color: var(--light-grey);
+}
+
