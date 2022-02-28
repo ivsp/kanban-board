@@ -32,7 +32,19 @@ function Column({ type }) {
     setPrintAddCard(false);
   };
   // cardsData.forEach((card, i) => (card.id = i + 1)); ya no tiene sentido, asignamos el id con una variable de estado
-  console.log(cardsData);
+
+  const clearAllDoneCards = (e) => {
+    e.stopPropagation();
+    while (cardsData.find(e => e.columnID === 'Done')) {
+      cardsData.forEach((card, i) => {
+        if (card.columnID === 'Done') {
+          cardsData.splice(i, 1);
+
+        }
+      });
+    }
+    setCardsData([...cardsData])
+  }
 
   const filteredCards = cardsData.filter((card) => card.columnID === type);
 
@@ -45,15 +57,20 @@ function Column({ type }) {
           </p>
           <p className="column__type column-text">{type}</p>
         </div>
-        {printAddCard ? (
-          <button onClick={openAddCard} className="column__button-add-card">
-            -
-          </button>
-        ) : (
-          <button onClick={openAddCard} className="column__button-add-card">
-            +
-          </button>
-        )}
+        <div className="column__right-side-actions">
+
+          {printAddCard ? (
+            <button onClick={openAddCard} className="column__button-add-card">
+              -
+            </button>
+          ) : (
+            <button onClick={openAddCard} className="column__button-add-card">
+              +
+            </button>
+          )}
+          {type === 'Done' ? <button onClick={clearAllDoneCards} className="column__button-clear-all">Clear All</button> : ''}
+        </div>
+
       </div>
       {printAddCard ? (
         <AddCard
