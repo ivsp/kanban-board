@@ -35,16 +35,11 @@ function Column({ type }) {
 
   const clearAllDoneCards = (e) => {
     e.stopPropagation();
-    while (cardsData.find(e => e.columnID === 'Done')) {
-      cardsData.forEach((card, i) => {
-        if (card.columnID === 'Done') {
-          cardsData.splice(i, 1);
-
-        }
-      });
-    }
-    setCardsData([...cardsData])
-  }
+    const discardDoneCards = cardsData.filter(
+      ({ columnID }) => columnID !== "Done"
+    );
+    setCardsData(discardDoneCards);
+  };
 
   const filteredCards = cardsData.filter((card) => card.columnID === type);
 
@@ -58,7 +53,6 @@ function Column({ type }) {
           <p className="column__type column-text">{type}</p>
         </div>
         <div className="column__right-side-actions">
-
           {printAddCard ? (
             <button onClick={openAddCard} className="column__button-add-card">
               -
@@ -68,9 +62,17 @@ function Column({ type }) {
               +
             </button>
           )}
-          {type === 'Done' ? <button onClick={clearAllDoneCards} className="column__button-clear-all">Clear All</button> : ''}
+          {type === "Done" ? (
+            <button
+              onClick={clearAllDoneCards}
+              className="column__button-clear-all"
+            >
+              Clear All
+            </button>
+          ) : (
+            ""
+          )}
         </div>
-
       </div>
       {printAddCard ? (
         <AddCard
