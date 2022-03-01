@@ -5,11 +5,12 @@ import roja from './done.png'
 import verde from './icone-cercle-vert.png'
 
 function Card({ title = "card title", id, date, time, columnID }) {
-  const { cardsData, setCardsData } = useContext(CardContext);
-  console.log(columnID)
+  const [cardsData, setCardsData] = useContext(CardContext);
+
 
   const handleDeleteCard = (e) => {
     e.stopPropagation();
+    console.log();
     cardsData.forEach((card, i) => {
       if (card.id === id) {
         cardsData.splice(i, 1);
