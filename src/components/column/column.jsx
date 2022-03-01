@@ -6,7 +6,14 @@ import { CardContext } from "../../context/cards-context";
 import { useContext } from "react";
 
 function Column({ type }) {
-  const [cardsData, setCardsData, idCard, setIdCard] = useContext(CardContext);
+  const [
+    cardsData,
+    setCardsData,
+    idCard,
+    setIdCard,
+    filterCards,
+    setFilterCards,
+  ] = useContext(CardContext);
   const [printAddCard, setPrintAddCard] = useState(false);
 
   const addCard = (cardTitle) => {
@@ -23,6 +30,7 @@ function Column({ type }) {
     setCardsData([...cardsData, card]);
     setPrintAddCard(false);
     setIdCard(idCard + 1);
+    setFilterCards([...cardsData, card]);
   };
 
   const openAddCard = () => setPrintAddCard(!printAddCard);
@@ -39,9 +47,10 @@ function Column({ type }) {
       ({ columnID }) => columnID !== "Done"
     );
     setCardsData(discardDoneCards);
+    setFilterCards(discardDoneCards);
   };
 
-  const filteredCards = cardsData.filter((card) => card.columnID === type);
+  const filteredCards = filterCards.filter((card) => card.columnID === type);
 
   return (
     <section className="column__container">
@@ -83,8 +92,16 @@ function Column({ type }) {
         <></>
       )}
 
-      {filteredCards.map(({ title, id, date, time,columnID }) => {
-        return <Card time={time} date={date} id={id} title={title} columnID={columnID}></Card>;
+      {filteredCards.map(({ title, id, date, time, columnID }) => {
+        return (
+          <Card
+            time={time}
+            date={date}
+            id={id}
+            title={title}
+            columnID={columnID}
+          ></Card>
+        );
       })}
     </section>
   );
