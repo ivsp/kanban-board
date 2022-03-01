@@ -3,14 +3,19 @@ import { useState } from "react";
 import Card from "../card";
 import AddCard from "../add-card/addcard";
 import { CardContext } from "../../context/cards-context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+
 
 function Column({ type }) {
-  const [cardsData, setCardsData, idCard, setIdCard] = useContext(CardContext);
+  const [cardsData, setCardsData, idCard, setIdCard, userFilteredCards, setUserFilteredCards] = useContext(CardContext);
   const [printAddCard, setPrintAddCard] = useState(false);
 
+
+  const printFilteredCards = arrayOfCards => arrayOfCards.filter((card) => card.columnID === type)
+
+  let filteredCards = userFilteredCards.length === 0 ? printFilteredCards(cardsData) : printFilteredCards(userFilteredCards)
+
   const addCard = (cardTitle) => {
-    console.log(typeof idCard);
     const date = new Date().toDateString();
     const time = new Date().toLocaleTimeString().substring(0, 5);
     const card = {
@@ -21,6 +26,7 @@ function Column({ type }) {
       time: time,
     };
     setCardsData([...cardsData, card]);
+    setUserFilteredCards([...cardsData, card])
     setPrintAddCard(false);
     setIdCard(idCard + 1);
   };
@@ -31,7 +37,6 @@ function Column({ type }) {
     e.stopPropagation();
     setPrintAddCard(false);
   };
-  // cardsData.forEach((card, i) => (card.id = i + 1)); ya no tiene sentido, asignamos el id con una variable de estado
 
   const clearAllDoneCards = (e) => {
     e.stopPropagation();
@@ -39,9 +44,9 @@ function Column({ type }) {
       ({ columnID }) => columnID !== "Done"
     );
     setCardsData(discardDoneCards);
+    setUserFilteredCards(discardDoneCards);
   };
 
-  const filteredCards = cardsData.filter((card) => card.columnID === type);
 
   return (
     <section className="column__container">
@@ -84,7 +89,7 @@ function Column({ type }) {
       )}
 
       {filteredCards.map(({ title, id, date, time,columnID }) => {
-        return <Card time={time} date={date} id={id} title={title} columnID={columnID}></Card>;
+        return <Card key={id} time={time} date={date} id={id} title={title} columnID={columnID}></Card>;
       })}
     </section>
   );
