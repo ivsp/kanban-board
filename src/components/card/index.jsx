@@ -5,7 +5,7 @@ import roja from './done.png'
 import verde from './icone-cercle-vert.png'
 
 function Card({ title = "card title", id, date, time, columnID }) {
-  const [cardsData, setCardsData, , , , , setUserFilteredCards] = useContext(CardContext);
+  const [cardsData, setCardsData, , , , setUserFilteredCards] = useContext(CardContext);
 
 
   const handleDeleteCard = (e) => {
