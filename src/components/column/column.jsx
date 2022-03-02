@@ -16,9 +16,13 @@ function Column({ type }) {
     update,
     setUpdate,
   ] = useContext(CardContext);
-  const [printAddCard, setPrintAddCard] = useState(false);
+  const [printAddCard, setPrintAddCard] = useState();
 
   useEffect(() => {
+    if (filterCards.length === 0 && !update) {
+      localStorage.removeItem("cards");
+      localStorage.removeItem("idCards");
+    }
     if (filterCards.length !== 0) {
       localStorage.setItem("cards", JSON.stringify(filterCards));
       localStorage.setItem("idCards", JSON.stringify(idCard));
@@ -47,14 +51,14 @@ function Column({ type }) {
     setPrintAddCard(false);
     setIdCard(idCard + 1);
     setFilterCards([...cardsData, card]);
-    setUpdate(!update);
+    setUpdate(true);
   };
 
   const openAddCard = () => setPrintAddCard(!printAddCard);
   const closeAddCard = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setPrintAddCard(false);
+    setUpdate(false);
   };
   // cardsData.forEach((card, i) => (card.id = i + 1)); ya no tiene sentido, asignamos el id con una variable de estado
 
