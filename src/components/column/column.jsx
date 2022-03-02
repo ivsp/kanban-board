@@ -11,9 +11,7 @@ function Column({ type }) {
   const [printAddCard, setPrintAddCard] = useState(false);
 
 
-  const printFilteredCards = arrayOfCards => arrayOfCards.filter((card) => card.columnID === type)
-
-  let filteredCards = userFilteredCards.length === 0 ? printFilteredCards(cardsData) : printFilteredCards(userFilteredCards)
+  const filteredCards = userFilteredCards.filter((card) => card.columnID === type)
 
   const addCard = (cardTitle) => {
     const date = new Date().toDateString();
@@ -88,7 +86,7 @@ function Column({ type }) {
         <></>
       )}
 
-      {filteredCards.map(({ title, id, date, time,columnID }) => {
+      {filteredCards.map(({ title, id, date, time, columnID }) => {
         return <Card key={id} time={time} date={date} id={id} title={title} columnID={columnID}></Card>;
       })}
     </section>
