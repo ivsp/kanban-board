@@ -5,7 +5,7 @@ import roja from "./done.png";
 import verde from "./icone-cercle-vert.png";
 
 function Card({ title = "card title", id, date, time, columnID }) {
-  const [cardsData, setCardsData, , , , setFilterCards] =
+  const [cardsData, setCardsData, , , , setFilterCards, update, setUpdate] =
     useContext(CardContext);
 
   const handleDeleteCard = (e) => {
@@ -16,6 +16,7 @@ function Card({ title = "card title", id, date, time, columnID }) {
         cardsData.splice(i, 1);
         setCardsData([...cardsData]);
         setFilterCards([...cardsData]);
+        setUpdate(!update);
       }
     });
   };

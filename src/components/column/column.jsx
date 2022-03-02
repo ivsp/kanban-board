@@ -1,5 +1,5 @@
 import "./style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../card";
 import AddCard from "../add-card/addcard";
 import { CardContext } from "../../context/cards-context";
@@ -13,11 +13,27 @@ function Column({ type }) {
     setIdCard,
     filterCards,
     setFilterCards,
+    update,
+    setUpdate,
   ] = useContext(CardContext);
   const [printAddCard, setPrintAddCard] = useState(false);
 
+  useEffect(() => {
+    if (filterCards.length !== 0) {
+      localStorage.setItem("cards", JSON.stringify(filterCards));
+      localStorage.setItem("idCards", JSON.stringify(idCard));
+    } else {
+      const cardsValue = localStorage.getItem("cards");
+      if (cardsValue !== null) {
+        const idValue = localStorage.getItem("idCards");
+        setCardsData(JSON.parse(cardsValue));
+        setFilterCards(JSON.parse(cardsValue));
+        setIdCard(parseInt(idValue));
+      }
+    }
+  }, [update]);
+
   const addCard = (cardTitle) => {
-    console.log(typeof idCard);
     const date = new Date().toDateString();
     const time = new Date().toLocaleTimeString().substring(0, 5);
     const card = {
@@ -31,6 +47,7 @@ function Column({ type }) {
     setPrintAddCard(false);
     setIdCard(idCard + 1);
     setFilterCards([...cardsData, card]);
+    setUpdate(!update);
   };
 
   const openAddCard = () => setPrintAddCard(!printAddCard);
@@ -48,6 +65,7 @@ function Column({ type }) {
     );
     setCardsData(discardDoneCards);
     setFilterCards(discardDoneCards);
+    setUpdate(!update);
   };
 
   const filteredCards = filterCards.filter((card) => card.columnID === type);

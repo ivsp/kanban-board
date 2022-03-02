@@ -5,6 +5,8 @@ function CardContextProvider({ children }) {
   const [cardsData, setCardsData] = useState([]);
   const [idCard, setIdCard] = useState(0);
   const [filterCards, setFilterCards] = useState([]);
+  const [update, setUpdate] = useState(true);
+
   return (
     <CardContext.Provider
       value={[
@@ -14,6 +16,8 @@ function CardContextProvider({ children }) {
         setIdCard,
         filterCards,
         setFilterCards,
+        update,
+        setUpdate,
       ]}
     >
       {children}
