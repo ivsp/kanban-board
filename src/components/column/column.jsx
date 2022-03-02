@@ -7,7 +7,7 @@ import { useContext, useEffect } from "react";
 
 
 function Column({ type }) {
-  const [cardsData, setCardsData, idCard, setIdCard, userFilteredCards, setUserFilteredCards] = useContext(CardContext);
+  const [cardsData, setCardsData, idCard, setIdCard, userFilteredCards, setUserFilteredCards, check] = useContext(CardContext);
   const [printAddCard, setPrintAddCard] = useState(false);
 
 
@@ -23,12 +23,15 @@ function Column({ type }) {
       date: date,
       time: time,
     };
+
     setCardsData([...cardsData, card]);
-    setUserFilteredCards([...cardsData, card])
+    setUserFilteredCards([...userFilteredCards, card]);
     setPrintAddCard(false);
     setIdCard(idCard + 1);
+
   };
 
+  check();
   const openAddCard = () => setPrintAddCard(!printAddCard);
   const closeAddCard = (e) => {
     e.preventDefault();
@@ -38,11 +41,13 @@ function Column({ type }) {
 
   const clearAllDoneCards = (e) => {
     e.stopPropagation();
-    const discardDoneCards = cardsData.filter(
+    const discardDoneCards = userFilteredCards.filter(
       ({ columnID }) => columnID !== "Done"
     );
+
     setCardsData(discardDoneCards);
     setUserFilteredCards(discardDoneCards);
+
   };
 
 
