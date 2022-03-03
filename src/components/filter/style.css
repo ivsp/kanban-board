@@ -16,11 +16,15 @@
   margin-top: 10px;
 }
 .filter__filter {
-  margin-top: 45px;
-  margin-right: 100px;
   width: 350px;
   height: 30px;
   border-radius: 5px;
-  border-color: #898b8d;
-  padding-left: 20px;
+  margin: 1rem 4rem 0 0;
+  border: solid 1px #bec9d3;
+}
+
+.filter__filter:focus{
+  outline: 0 none;
+  border: solid 1px #bec9d3;
+  box-shadow: none;
 }

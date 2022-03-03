@@ -15,9 +15,51 @@ function Card({ title = "card title", id, date, time, columnID }) {
     setCardsData(discardCard);
     setUserFilteredCards(discardCard);
   };
+  const handleDragStart = (e) => {
+    console.log('handle drag start');
+    e.dataTransfer.setData('card-id', e.target.id);
+
+    // setTimeout(() => {
+    //   const card = document.getElementById(id)
+    //   card.style.display = 'flex'
+    // }, 0);
+
+  }
+
+  const handleDrag = (e) => {
+    console.log('handle drag');
+    const card = document.getElementById(id)
+    card.style.display = 'none'
+  }
+
+  const handleDragEnd = (e) => {
+    const cardSelected = document.getElementById(id)
+    cardSelected.style.display = 'flex';
+    const column = e.nativeEvent.path[1].id;
+
+    const newCards = userFilteredCards.map(card => {
+      const cards = []
+      if (card.id === parseInt(cardSelected.id)) {
+        card.columnID = column
+        cards.push(card)
+      } else {
+        cards.push(card)
+      }
+      return cards
+    })
+    check();
+    // setCardsData([...newCards])
+    // setUserFilteredCards([...newCards])
+    console.log(newCards);
+
+
+
+
+
+  }
 
   return (
-    <article className={`card`}>
+    <article onDrag={handleDrag} onDragStart={handleDragStart} id={id} onDragEnd={handleDragEnd} draggable="true" className={`card`}>
       <div className="card__main-info">
         <div className="card__title-container" >
           <div >

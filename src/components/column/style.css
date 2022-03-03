@@ -3,8 +3,7 @@
     padding: .2rem;
     max-height: 70vh;
     min-height: 70vh;
-    max-width: 50%;
-    min-width: 25%;
+    width: 30%;
     background-color: var(--light-grey);
     border-radius: .4rem;
     border: 1px solid var(--grey-border);
