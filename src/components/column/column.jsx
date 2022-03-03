@@ -50,9 +50,42 @@ function Column({ type }) {
 
   };
 
+  const handleDrop = (e) => {
+    console.log('handle  drop');
+    console.log(e.target);
+    const id = e.dataTransfer.getData('card-id');
+    console.log(id);
+    const draggable = document.getElementById(id);
+    console.log(draggable);
+    // add it to the drop target
+    console.log(e);
+    e.target.appendChild(draggable);
+    const column = e.target.id;
+    e.dataTransfer.setData('column-id', e.target.id);
+
+    // const newCards = userFilteredCards.map(card => {
+    //   if (card.id === parseInt(id)) card.columnID = column
+    // })
+
+
+    // check();
+
+    console.log(userFilteredCards);
+
+  }
+
+  const handleDragEnter = (e) => {
+    console.log(e);
+    console.log('handle drag enter');
+    e.preventDefault();
+  }
+  const handleDragOver = (e) => {
+    console.log('handle drag over');
+    e.preventDefault();
+  }
 
   return (
-    <section className="column__container">
+    <section id={type} onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDrop={handleDrop} className="column__container">
       <div className="column__header">
         <div className="column__main-info-container">
           <p className="column__cards-counter column-text">
